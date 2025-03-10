@@ -28,11 +28,29 @@ void swap(int* x, int* y) {
  * @param rBound - the right bound of the sublist
  */
 int partition(int values[], int lowIndex, int highIndex) {
-    return 0;
+    int pivotValue = values[highIndex];
+    int swapIndex = lowIndex;
+
+    for(int i = lowIndex; i<=highIndex; i++){
+        if(values[i] <= pivotValue){
+            int temp = values[i];
+            values[i] = values[swapIndex];
+            values[swapIndex] = temp;
+            swapIndex++;
+        }
+    }
+    return swapIndex-1;
 }
 
 void quickSort(int array[], int lBound, int rBound) {
+    if(lBound >= rBound){
+        return;
+    }
 
+    int pivotIndex = partition(array,lBound,rBound);
+
+    quickSort(array, lBound, pivotIndex-1);
+    quickSort(array, pivotIndex+1, rBound);
 }
 
 
